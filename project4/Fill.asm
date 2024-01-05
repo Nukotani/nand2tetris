@@ -1,0 +1,43 @@
+(LOOP)
+  @KBD
+  D=M
+  @FILL
+  D;JNE
+  M=0
+  @LOOP
+  0;JNE
+
+
+(FILL)
+  @256
+  D=A
+  @row
+  M=D
+  @i
+  M=0
+  (J)
+    @32
+    D=A
+    @column
+    M=A
+    (I)
+      @i
+      D=M
+      M=M+1
+      @SCREEN
+      A=A+D
+      @65535
+      D=A
+      M=D
+      @column
+      M=M-1
+      D=M
+      @I
+      D;JNE
+    @row
+    M=M-1
+    D=M
+    @J
+    D;JNE
+  @LOOP
+  0;JMP
