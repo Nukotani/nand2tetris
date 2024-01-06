@@ -1,43 +1,42 @@
+@SCREEN
+D=A
+@screenptr
+M=D
+@24576
+D=A
+@R0
+M=D
+
 (LOOP)
   @KBD
   D=M
-  @FILL
-  D;JNE
-  M=0
-  @LOOP
-  0;JNE
-
-
-(FILL)
-  @256
-  D=A
-  @row
-  M=D
-  @i
-  M=0
-  (J)
-    @32
-    D=A
-    @column
-    M=A
-    (I)
-      @i
-      D=M
-      M=M+1
-      @SCREEN
-      A=A+D
-      @65535
-      D=A
-      M=D
-      @column
-      M=M-1
-      D=M
-      @I
-      D;JNE
-    @row
-    M=M-1
+  @WHITE
+  D;JEQ
+  (BLACK)
+    @screenptr
+    A=M
+    M=-1
+    @screenptr
     D=M
-    @J
-    D;JNE
-  @LOOP
-  0;JMP
+    @R0
+    D=M-D
+    @LOOP
+    D;JEQ
+    @screenptr
+    M=M+1
+    @LOOP
+    0;JMP
+  (WHITE)
+    @screenptr
+    A=M
+    M=0
+    @screenptr
+    D=M
+    @SCREEN
+    D=D-A
+    @LOOP
+    D;JEQ
+    @screenptr
+    M=M-1
+    @LOOP
+    0;JMP
